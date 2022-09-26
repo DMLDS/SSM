@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>list</title>
+
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+<div class="row clearfix">
+    <div class="col-md-12 column">
+        <div class="page-header">
+            <h1>
+                <small>书籍列表</small>
+            </h1>
+        </div>
+        <div class="row">
+            <div class="col-md-4 column">
+                <a class="btn btn-primary" th:href="@{/add}">新增书籍</a>
+            </div>
+            <div class="col-md-4 column">
+                <a class="btn btn-primary" th:href="@{/allbook}">显示全部书籍</a>
+            </div>
+            <div class="col-md-4 column"></div>
+            <div class="col-md-4 column">
+            <form th:action="@{/sousuo}" method="post">
+                <input type="text" name="name" class="form-control" placeholder="请输入要查询的书籍名称">
+                <input type="submit" value="搜索" class="btn btn-primary">
+            </form>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-hover table-striped">
+                <thead>
+                <tr>
+                    <th>书籍编号</th>
+                    <th>书籍名称</th>
+                    <th>书籍数量</th>
+                    <th>书籍详情</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="book:${all}">
+                    <td th:text="${book.bookID}"></td>
+                    <td th:text="${book.bookName}"></td>
+                    <td th:text="${book.bookCounts}"></td>
+                    <td th:text="${book.detail}"></td>
+                    <td>
+                        <a th:href="@{'/update/'+${book.bookID}}">修改</a>
+                        <a th:href="@{'/delete/'+${book.bookID}}">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
